@@ -25,4 +25,16 @@ class TestGherkinParser {
 		assertThat(parsed).isNotNull();
 	}
 
+	@Test
+	void elementsAreVisible() {
+		var keywordMapProvider = new DefaultKeywordMapProvider();
+		var parser = new GherkinParser(keywordMapProvider);
+		var parsed = parser.parse(getClass().getResourceAsStream("/simpleScenario.feature"));
+		assertThat(parsed).isNotNull();
+		assertThat(parsed.feature().children()).hasSize(1);
+		var child = parsed.feature().children().getFirst();
+		assertThat(child).isNotNull();
+	}
+
+
 }
