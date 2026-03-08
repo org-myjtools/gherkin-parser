@@ -30,14 +30,14 @@ A lightweight Java library for parsing Gherkin feature files into a structured A
 <dependency>
     <groupId>org.myjtools</groupId>
     <artifactId>gherkin-parser</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'org.myjtools:gherkin-parser:1.0.1'
+implementation 'org.myjtools:gherkin-parser:1.0.2'
 ```
 
 ## Usage

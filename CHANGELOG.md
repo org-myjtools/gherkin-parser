@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2026-03-08
+
+### Changed
+
+- Add `E` as an alternative keyword for `and` in the Spanish dialect (`gherkin_es.properties`).
+
 ## [1.0.1] - 2026-02-07
 
 ### Changed
