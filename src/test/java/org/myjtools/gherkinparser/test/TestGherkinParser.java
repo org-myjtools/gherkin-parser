@@ -26,6 +26,23 @@ class TestGherkinParser {
 	}
 
 	@Test
+	void multiWordKeyword_dadoQue_isParsedAsKeywordNotStepText() {
+		var keywordMapProvider = new DefaultKeywordMapProvider();
+		var parser = new GherkinParser(keywordMapProvider);
+		var parsed = parser.parse(getClass().getResourceAsStream("/spanishScenario.feature"));
+		assertThat(parsed).isNotNull();
+		var scenario = parsed.feature().children().getFirst();
+		var steps = scenario.children();
+		assertThat(steps).hasSize(3);
+		// "Dado que" must be recognized as the full keyword,
+		// so the step text must NOT start with "que"
+		var firstStep = steps.getFirst();
+		assertThat(firstStep.keyword().strip()).isEqualTo("Dado que");
+		assertThat(firstStep.text()).doesNotStartWith("que");
+		assertThat(firstStep.text()).isEqualTo("el sistema está listo");
+	}
+
+	@Test
 	void elementsAreVisible() {
 		var keywordMapProvider = new DefaultKeywordMapProvider();
 		var parser = new GherkinParser(keywordMapProvider);

@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>gherkin-parser</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <name>Gherkin Parser</name>
 
     <dependencies>

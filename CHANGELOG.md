@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2026-03-09
+
+### Fixed
+
+- Multi-word step keywords (e.g. `Dado que` in Spanish) were incorrectly parsed: only the first
+  word was recognized as the keyword, leaving the rest as part of the step text. Keywords are now
+  sorted by length (longest first) before matching, so more specific keywords always take priority.
+  The same fix applies to title keywords (e.g. `Esquema del escenario` vs `Escenario`).
+
 ## [1.0.2] - 2026-03-08
 
 ### Changed

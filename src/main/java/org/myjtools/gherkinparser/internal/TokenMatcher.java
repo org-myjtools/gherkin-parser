@@ -141,7 +141,10 @@ public class TokenMatcher {
     }
 
     private boolean matchTitleLine(Token token, TokenType tokenType, List<String> keywords) {
-        for (String keyword : keywords) {
+        List<String> sorted = keywords.stream()
+            .sorted((a, b) -> b.length() - a.length())
+            .toList();
+        for (String keyword : sorted) {
             if (token.line().startsWithTitleKeyword(keyword)) {
                 String title = token.line().getRestTrimmed(keyword.length() + GherkinLanguageConstants.TITLE_KEYWORD_SEPARATOR.length());
                 setTokenMatched(token, tokenType, title, keyword, null, null);
@@ -181,7 +184,9 @@ public class TokenMatcher {
 
     
     public boolean matchStepLine(Token token) {
-        List<String> keywords = currentDialect.keywords(STEP);
+        List<String> keywords = currentDialect.keywords(STEP).stream()
+            .sorted((a, b) -> b.length() - a.length())
+            .toList();
         for (String keyword : keywords) {
             if (token.line().startsWith(keyword)) {
                 String stepText = token.line().getRestTrimmed(keyword.length());
