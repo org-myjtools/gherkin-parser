@@ -188,7 +188,7 @@ public class TokenMatcher {
             .sorted((a, b) -> b.length() - a.length())
             .toList();
         for (String keyword : keywords) {
-            if (token.line().startsWith(keyword)) {
+            if (token.line().startsWithStepKeyword(keyword)) {
                 String stepText = token.line().getRestTrimmed(keyword.length());
                 setTokenMatched(token, TokenType.STEP_LINE, stepText, keyword, null, null);
                 return true;

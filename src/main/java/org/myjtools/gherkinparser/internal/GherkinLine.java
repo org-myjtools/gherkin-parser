@@ -36,6 +36,14 @@ public class GherkinLine {
         return trimmedLineText.startsWith(prefix);
     }
 
+    public boolean startsWithStepKeyword(String keyword) {
+        if (!trimmedLineText.startsWith(keyword)) {
+            return false;
+        }
+        int len = keyword.length();
+        return len >= trimmedLineText.length() || Character.isWhitespace(trimmedLineText.charAt(len));
+    }
+
     public String getRestTrimmed(int length) {
         return trimmedLineText.substring(length).trim();
     }

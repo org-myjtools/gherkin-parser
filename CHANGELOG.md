@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4] - 2026-03-09
+
+### Fixed
+
+- Single-character step keywords (e.g. `E` in Spanish for "and") were incorrectly matching title
+  keywords that start with the same letter (e.g. `Ejemplos:`). Step keyword matching now requires
+  the keyword to be followed by whitespace or end of line, preventing false matches.
+
 ## [1.0.3] - 2026-03-09
 
 ### Fixed
