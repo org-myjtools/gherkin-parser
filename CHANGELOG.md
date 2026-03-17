@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2026-03-17
+
+### Fixed
+
+- `GherkinDialectFactory` now falls back gracefully when an unknown language tag is encountered
+  (e.g. `# language: dsl`). Instead of throwing `NoSuchLanguageException`, the factory creates a
+  `GherkinDialect` that uses the default (English) keyword map while preserving the original locale.
+  This ensures that `feature.language()` still returns the declared language identifier, keeping
+  downstream step-matching logic working correctly.
+
 ## [1.0.4] - 2026-03-09
 
 ### Fixed

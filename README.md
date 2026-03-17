@@ -30,14 +30,14 @@ A lightweight Java library for parsing Gherkin feature files into a structured A
 <dependency>
     <groupId>org.myjtools</groupId>
     <artifactId>gherkin-parser</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'org.myjtools:gherkin-parser:1.0.4'
+implementation 'org.myjtools:gherkin-parser:1.0.5'
 ```
 
 ## Usage
@@ -107,6 +107,13 @@ var parser = new GherkinParser(List.of(
     new CustomKeywordMapProvider()
 ));
 ```
+
+### Unknown Language Fallback
+
+When a feature file declares a language that has no registered keyword map (e.g. `# language: dsl`),
+the parser falls back to the default dialect keywords (English) while still preserving the declared
+language identifier. This means `feature.language()` returns the original tag (`"dsl"`) so that
+downstream consumers can still use it for step matching or locale resolution.
 
 ## Supported Elements
 

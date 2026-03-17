@@ -1,9 +1,6 @@
 package org.myjtools.gherkinparser;
 
 
-import org.myjtools.gherkinparser.elements.Location;
-import org.myjtools.gherkinparser.internal.NoSuchLanguageException;
-
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -15,10 +12,12 @@ public class GherkinDialectFactory {
 
     private final KeywordMapProvider keywordMapProvider;
     private final GherkinDialect defaultDialect;
+    private final Locale defaultLocale;
 
 
     public GherkinDialectFactory(KeywordMapProvider keywordMapProvider, String defaultDialectName) {
         this.keywordMapProvider = keywordMapProvider;
+        this.defaultLocale = Locale.forLanguageTag(defaultDialectName);
         this.defaultDialect = dialectFor(defaultDialectName);
     }
 
@@ -35,8 +34,10 @@ public class GherkinDialectFactory {
 
     private GherkinDialect readDialectFor(Locale locale) {
         return keywordMapProvider.keywordMap(locale)
-            .map( it -> new GherkinDialect(locale,it))
-            .orElseThrow(()-> new NoSuchLanguageException(locale, new Location()));
+            .map(it -> new GherkinDialect(locale, it))
+            .orElseGet(() -> keywordMapProvider.keywordMap(defaultLocale)
+                .map(defaultKeywords -> new GherkinDialect(locale, defaultKeywords))
+                .orElse(defaultDialect));
     }
 
 
